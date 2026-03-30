@@ -32,9 +32,10 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
     if (!data) return notFound();
 
-    const product = data.products.find((p) => p.sku === sku);
+    const normalizedSku = decodeURIComponent(sku).replace(/[^A-Za-z0-9-]/g, '');
+    const product = data.products.find((p) => p.sku === normalizedSku);
     if (!product) return notFound();
 
     // Truyền dữ liệu xuống Client Component để xử lý logic tương tác
-    return <ProductDetailClient initialData={data} product={product} sku={sku} />;
+    return <ProductDetailClient initialData={data} product={product} sku={normalizedSku} />;
 }

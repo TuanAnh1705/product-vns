@@ -28,7 +28,7 @@ export class ProductService {
         const products: ProductDTO[] = rows.map(row => {
             const d = row.toObject();
             return {
-                sku: d['SKU / Product Code (TO BE LEFT BLANK)'],
+                sku: (d['SKU / Product Code (TO BE LEFT BLANK)'] || '').replace(/[^A-Za-z0-9-]/g, ''),
                 name: d['Product Name'],
                 price: { min: d['Price Min (USD)'], max: d['Price Max (USD)'] },
                 moq: d['MOQ'],
