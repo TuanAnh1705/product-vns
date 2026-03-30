@@ -3,6 +3,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ====== Bảo vệ nội dung: tắt bôi đen, copy, kéo ảnh ====== */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+img {
+  pointer-events: none;
+}
+/* ========================================================= */
+
 @font-face {
   font-family: 'Blaak';
   src: url('/fonts/Blaak Regular.otf') format('opentype');
