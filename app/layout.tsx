@@ -42,18 +42,18 @@ export default function RootLayout({
               // Tùy chỉnh thêm CSS để Toast trông chuyên nghiệp hơn (Style Neon Tech)
               duration: 3000,
               style: {
-                background: "#111F32", // Màu nền tối theo style của bạn
+                background: "#1E4A36", // Màu nền tối theo style của bạn
                 color: "#fff",
                 padding: "20px 30px",
                 borderRadius: "12px",
                 fontSize: "16px",
                 fontWeight: "500",
-                border: "1px solid #256BE8", // Viền xanh Neon
+                border: "1px solid #428159", // Viền xanh Neon
                 boxShadow: "0 0 20px rgba(37, 107, 232, 0.2)", // Đổ bóng phát sáng
               },
               success: {
                 iconTheme: {
-                  primary: "#256BE8",
+                  primary: "#428159",
                   secondary: "#fff",
                 },
               },
