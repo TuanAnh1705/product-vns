@@ -285,7 +285,7 @@ export default function Footer() {
                 ))}
               </ul>
               <p className="text-white font-svn-regular text-md tracking-tighter">
-                © 2023 Vietnam Sourcing Inc.
+                © 2026 Vietnam Sourcing Inc.
               </p>
             </div>
 
