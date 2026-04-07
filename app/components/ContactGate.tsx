@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import axios from "axios";
 import {
@@ -15,17 +15,26 @@ import { toast } from "react-hot-toast";
 import {
   Dialog,
   DialogContent,
-  DialogTrigger,
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
 import { ApiResponse } from "@/backend/dto/product.dto";
 
-export function ContactDialog({ children }: { children: React.ReactNode }) {
+const STORAGE_KEY = "cns_contact_submitted";
+
+export function ContactGate() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    const submitted = localStorage.getItem(STORAGE_KEY);
+    if (!submitted) {
+      const timer = setTimeout(() => setOpen(true), 800);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
@@ -33,13 +42,14 @@ export function ContactDialog({ children }: { children: React.ReactNode }) {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const res = await axios.post<ApiResponse<null>>('/api/contact', data)
+      const res = await axios.post<ApiResponse<null>>("/api/contact", data);
       if (res.data.success) {
         toast.success(res.data.message || "Message sent successfully!");
+        localStorage.setItem(STORAGE_KEY, "1");
         setOpen(false);
         (e.target as HTMLFormElement).reset();
       }
-    } catch (err) {
+    } catch {
       toast.error("Something went wrong! Please try again.");
     } finally {
       setLoading(false);
@@ -47,31 +57,36 @@ export function ContactDialog({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-
+    <Dialog open={open} onOpenChange={() => {}}>
       <DialogContent
+        showCloseButton={false}
+        onEscapeKeyDown={(e) => e.preventDefault()}
+        onInteractOutside={(e) => e.preventDefault()}
         className="
-          w-[92%] 
-          max-w-[92%] 
-          md:max-w-5xl 
+          w-[92%]
+          max-w-[92%]
+          md:max-w-5xl
           max-h-[92%]
           p-3 md:p-7
           bg-white border-none rounded-md
           overflow-y-auto md:overflow-hidden
+          data-[state=open]:animate-in
+          data-[state=open]:fade-in-0
+          data-[state=open]:slide-in-from-bottom-8
+          data-[state=open]:zoom-in-95
+          duration-500
         "
       >
         <div className="sr-only">
-          <DialogTitle>Contact Us - China Sourcing Co</DialogTitle>
+          <DialogTitle>Contact Us - Vietnam Sourcing</DialogTitle>
           <DialogDescription>
-            Get in touch with us by filling out the form below.
+            Please fill in your details to continue browsing.
           </DialogDescription>
         </div>
 
-        {/* Khung màu xanh bọc bên trong khung trắng */}
         <div className="flex flex-col md:flex-row bg-[#F2F2EB] rounded-md overflow-hidden">
 
-          {/* LEFT SIDE - Giảm bớt padding trên mobile để tiết kiệm diện tích */}
+          {/* LEFT SIDE */}
           <div className="w-full md:w-[48%] p-6 md:p-10 flex flex-col justify-between">
             <div>
               <h2 className="font-blaak text-3xl md:text-5xl font-medium text-[#E8C042] leading-tight tracking-tight mb-1">
@@ -81,11 +96,10 @@ export function ContactDialog({ children }: { children: React.ReactNode }) {
                 Better Together
               </h2>
               <p className="font-svn-regular font-medium text-[#585858] text-sm md:text-base opacity-80 leading-relaxed">
-                Drop your contact details into the form to gain full access to this page.
+                Drop your contact details into the form, and we&apos;ll reach out to you!
               </p>
             </div>
 
-            {/* Ảnh minh họa ẩn trên mobile cực nhỏ hoặc chỉnh nhỏ lại để form không bị đẩy xuống quá xa */}
             <div className="relative w-full aspect-square my-6 max-h-40 md:max-h-none">
               <Image
                 src="/assets/ship-contact.png"
@@ -110,7 +124,6 @@ export function ContactDialog({ children }: { children: React.ReactNode }) {
           <div className="w-full md:w-[55%] p-6 md:p-12">
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
 
-              {/* Name - Bắt buộc */}
               <div className="space-y-1.5">
                 <label className="text-[13px] md:text-sm font-svn-regular font-bold text-gray-600 ml-1">
                   Name <span className="text-red-600">*</span>
@@ -123,7 +136,6 @@ export function ContactDialog({ children }: { children: React.ReactNode }) {
                 />
               </div>
 
-              {/* Email - Bắt buộc */}
               <div className="space-y-1.5">
                 <label className="text-[13px] md:text-sm font-svn-regular font-bold text-gray-600 ml-1">
                   Email <span className="text-red-600">*</span>
@@ -137,7 +149,6 @@ export function ContactDialog({ children }: { children: React.ReactNode }) {
                 />
               </div>
 
-              {/* Company & Website - Gộp lại thành grid 2 cột trên desktop, 1 cột trên mobile */}
               <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-[13px] md:text-sm font-svn-regular font-bold text-gray-600 ml-1">Company</label>
@@ -157,7 +168,6 @@ export function ContactDialog({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
 
-              {/* MOQ */}
               <div className="space-y-1.5">
                 <label className="text-[13px] md:text-sm font-svn-regular font-bold text-gray-600 ml-1">MOQ Preference</label>
                 <Select name="moq" defaultValue="0-99">
@@ -172,7 +182,6 @@ export function ContactDialog({ children }: { children: React.ReactNode }) {
                 </Select>
               </div>
 
-              {/* Message */}
               <div className="space-y-1.5">
                 <label className="text-[13px] md:text-sm font-svn-regular font-bold text-gray-600 ml-1">Message</label>
                 <textarea
@@ -183,7 +192,6 @@ export function ContactDialog({ children }: { children: React.ReactNode }) {
                 />
               </div>
 
-              {/* Button Gửi - Đổi màu xanh đậm chuyên nghiệp hơn */}
               <button
                 type="submit"
                 disabled={loading}
@@ -191,9 +199,9 @@ export function ContactDialog({ children }: { children: React.ReactNode }) {
                   font-blaak tracking-tight w-full md:w-auto
                   bg-[#F4CA68] text-[#1E4A36]
                   px-10 py-4 rounded-none
-                  flex items-center justify-center gap-3 
-                  cursor-pointer transition-all 
-                  active:scale-95 disabled:opacity-50 
+                  flex items-center justify-center gap-3
+                  cursor-pointer transition-all
+                  active:scale-95 disabled:opacity-50
                   text-md
                   shadow-lg
                 "

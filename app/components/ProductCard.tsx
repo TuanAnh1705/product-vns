@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { ProductDTO } from '@/backend/dto/product.dto';
-import { ContactDialog } from './ContactDialog';
 
 interface ProductCardProps {
   product: ProductDTO;
@@ -129,11 +128,12 @@ export function ProductCard({
 
         {showButton && (
           <div className="relative z-20 mt-4 md:mt-6 lg:mt-8">
-            <ContactDialog>
-              <button className="font-blaak tracking-tight hidden md:block bg-[#F4CA68] text-[#1E4A36] px-8 py-2.5 rounded-none active:scale-95 transition-all whitespace-nowrap cursor-pointer">
-              Contact Us
-            </button>
-            </ContactDialog>
+            <a
+              href="mailto:info@vietnamsourcing.co"
+              className="font-blaak tracking-tight hidden md:inline-flex items-center bg-[#F4CA68] text-[#1E4A36] px-8 py-2.5 rounded-none active:scale-95 transition-all whitespace-nowrap cursor-pointer"
+            >
+              Email Us
+            </a>
           </div>
         )}
       </div>

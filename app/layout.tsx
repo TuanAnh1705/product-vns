@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ContentProtection />
-        <SearchProvider>
+<SearchProvider>
           <SearchHeader />
           <Toaster
             // 1. Đặt vị trí cơ bản là top-center để nó căn giữa chiều ngang trước

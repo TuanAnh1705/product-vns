@@ -5,7 +5,6 @@ import { HomeDataDTO, ProductDTO } from '@/backend/dto/product.dto';
 import { ProductCard } from '@/app/components/ProductCard';
 import { ChevronDown } from 'lucide-react';
 import { useSearch } from '@/app/context/SearchContext';
-import { ContactDialog } from '@/app/components/ContactDialog';
 import { LoadingCurtain } from '../components/LoadingCurtain';
 import { ProductGallery } from '../components/ProductGallery';
 import { ProductSpecs } from '../components/ProductSpecs';
@@ -104,11 +103,12 @@ export default function ProductDetailClient({ initialData, product, sku }: Clien
             </div>
             <p className="text-[#1E4A36] font-svn-regular font-bold text-sm md:text-md tracking-wider uppercase">MOQ: {product.moq} pieces</p>
             
-            <ContactDialog>
-              <button className="font-blaak tracking-tight w-full bg-[#F4CA68] text-[#1E4A36] py-5 rounded-none font-medium text-xl hover:bg-yellow-400 transition-all shadow-xl shadow-blue-100 active:scale-[0.98] cursor-pointer">
-                Get a Free Quote
-              </button>
-            </ContactDialog>
+            <a
+              href="mailto:info@vietnamsourcing.co"
+              className="font-blaak tracking-tight w-full bg-[#F4CA68] text-[#1E4A36] py-5 rounded-none font-medium text-xl hover:bg-yellow-400 transition-all active:scale-[0.98] cursor-pointer flex items-center justify-center"
+            >
+              Get a Free Quote
+            </a>
 
             <ProductSpecs product={product} />
           </div>

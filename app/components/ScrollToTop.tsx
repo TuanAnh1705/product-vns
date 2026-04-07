@@ -20,10 +20,19 @@ export function ScrollToTop() {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    (window as Window & { __scrollingToTop?: boolean }).__scrollingToTop = true;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    const checkDone = () => {
+      if (window.scrollY <= 1) {
+        (window as Window & { __scrollingToTop?: boolean }).__scrollingToTop = false;
+        window.scrollTo(0, 0);
+        window.dispatchEvent(new Event("scrollToTopDone"));
+      } else {
+        requestAnimationFrame(checkDone);
+      }
+    };
+    requestAnimationFrame(checkDone);
   };
 
   return (

@@ -80,7 +80,7 @@ export function Sidebar({ filters, onMoqChange, onPriceSearchChange, onClose }: 
                     className="flex items-center justify-between cursor-pointer group/row"
                     onClick={() => toggleSubAccordion(cat.main)}
                   >
-                    <p className={`text-sm md:text-md transition-all ${isMainCatActive ? 'text-[#428159] font-bold' : 'text-[#585858] group-hover/row:text-[#428159]'
+                    <p className={`text-sm md:text-md font-svn-regular transition-all ${isMainCatActive ? 'text-[#428159] font-bold' : 'text-[#585858] group-hover/row:text-[#428159]'
                       }`}>
                       {cat.main}
                     </p>
@@ -108,7 +108,7 @@ export function Sidebar({ filters, onMoqChange, onPriceSearchChange, onClose }: 
                               setSelectedSubCategory(sub);
                             }
                           }}
-                          className={`text-xs md:text-sm cursor-pointer py-1.5 pl-3 flex items-center gap-2 transition-all
+                          className={`text-xs md:text-sm font-svn-regular cursor-pointer py-1.5 pl-3 flex items-center gap-2 transition-all
                             ${selectedSubCategory === sub ? 'text-[#428159] font-bold' : 'text-[#585858] hover:text-[#428159]'}`}
                         >
                           {selectedSubCategory === sub && <Check size={14} className="text-green-600 stroke-[3px]" />}
@@ -125,7 +125,7 @@ export function Sidebar({ filters, onMoqChange, onPriceSearchChange, onClose }: 
           {hasMoreCats && (
             <button
               onClick={() => setIsMoreCatsExpanded(!isMoreCatsExpanded)}
-              className="flex items-center gap-1 text-xs md:text-sm bg-white text-[#1F4A36] border border-[#428159] px-3 md:px-4 py-1.5 md:py-2 rounded-none mt-4 hover:bg-green-50 transition-all font-medium cursor-pointer"
+              className="flex items-center gap-1 text-xs md:text-sm font-svn-regular bg-white text-[#1F4A36] border border-[#428159] px-3 md:px-4 py-1.5 md:py-2 rounded-none mt-4 hover:bg-green-50 transition-all font-medium cursor-pointer"
             >
               <span>{isMoreCatsExpanded ? "Less" : "More"}</span>
               <ChevronDown
@@ -146,7 +146,7 @@ export function Sidebar({ filters, onMoqChange, onPriceSearchChange, onClose }: 
                 <li
                   key={item}
                   onClick={() => handleToggle(section.current, item, section.setter)}
-                  className={`text-sm md:text-md cursor-pointer transition-all py-1 flex items-center gap-2 ${section.current === item ? 'text-[#428159] font-bold' : 'text-[#585858] hover:text-[#428159]'
+                  className={`text-sm md:text-md font-svn-regular cursor-pointer transition-all py-1 flex items-center gap-2 ${section.current === item ? 'text-[#428159] font-bold' : 'text-[#585858] hover:text-[#428159]'
                     }`}
                 >
                   {section.current === item && <Check size={14} className="text-green-600 stroke-[3px]" />}
@@ -166,7 +166,7 @@ export function Sidebar({ filters, onMoqChange, onPriceSearchChange, onClose }: 
                 ref={moqInputRef}
                 type="number"
                 placeholder="Less than"
-                className="w-full border border-[#428159] rounded-md py-2 px-3 pr-10 outline-none text-sm bg-white focus:border-[#1E4A36] transition-all"
+                className="w-full border border-[#428159] rounded-md py-2 px-3 pr-10 outline-none text-sm font-svn-regular bg-white focus:border-[#1E4A36] transition-all"
                 onChange={(e) => onMoqChange(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleManualApply('moq')}
               />
@@ -187,7 +187,7 @@ export function Sidebar({ filters, onMoqChange, onPriceSearchChange, onClose }: 
                 ref={priceInputRef}
                 type="number"
                 placeholder="Enter Price"
-                className="w-full border border-[#428159] rounded-md py-2 px-3 pr-10 outline-none text-sm bg-white focus:border-[#1E4A36] transition-all"
+                className="w-full border border-[#428159] rounded-md py-2 px-3 pr-10 outline-none text-sm font-svn-regular bg-white focus:border-[#1E4A36] transition-all"
                 onChange={(e) => onPriceSearchChange(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleManualApply('price')}
               />

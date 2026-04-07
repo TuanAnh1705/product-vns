@@ -159,6 +159,31 @@ img {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@keyframes marquee-ltr {
+  /* Vì animation áp dụng cho từng khối con, ta cần nó dịch chuyển đúng 100% chiều dài của chính nó */
+  0% { transform: translate3d(-100%, 0, 0); }
+  100% { transform: translate3d(0%, 0, 0); }
+}
+
+.animate-marquee-ltr {
+  /* Tốc độ mặc định cho Mobile (Màn hình nhỏ cần nhanh hơn 1 chút) */
+  animation: marquee-ltr 20s linear infinite;
+  display: flex;
+  
+  /* Tối ưu render bằng GPU, rất tốt cho Mobile */
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Tốc độ cho Desktop/Tablet */
+@media (min-width: 768px) {
+  .animate-marquee-ltr {
+    /* Màn hình lớn rộng hơn, cần số giây to hơn để chữ chạy chậm lại và mượt */
+    animation-duration: 60s; 
+  }
+}
+
 @layer base {
 
   /* Custom Font Classes */

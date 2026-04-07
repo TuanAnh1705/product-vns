@@ -1,7 +1,7 @@
 import { ProductDTO } from '@/backend/dto/product.dto';
 
 const DetailRow = ({ label, value, isGray }: { label: string, value: string, isGray?: boolean }) => (
-    <tr className={`${isGray ? 'bg-[#E9F0FF]/20' : 'bg-white'} border-b border-gray-300 last:border-0`}>
+    <tr className={`${isGray ? 'bg-[#F2FFF7]/30' : 'bg-white'} border-b border-gray-300 last:border-0`}>
         <td className="p-4 md:p-5 text-[#525252] text-sm md:text-md font-medium border-r border-gray-300 w-1/3">{label}</td>
         <td className="p-4 md:p-5 text-[#525252] text-sm md:text-md">{value}</td>
     </tr>
