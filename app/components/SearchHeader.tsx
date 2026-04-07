@@ -108,7 +108,7 @@ export function SearchHeader() {
                     value={selectedCategory || "all"}
                     onValueChange={handleCategoryChange}
                   >
-                    <SelectTrigger className="w-35 h-12! border-0 border-r border-r-[#428159] rounded-none focus:ring-0 text-[#5F6567] font-medium">
+                    <SelectTrigger className="w-35 h-12! border-0 border-r border-r-[#428159] rounded-none focus:ring-0 text-[#5F6567] font-svn-regular font-medium">
                       <SelectValue placeholder="Category" />
                     </SelectTrigger>
                     <SelectContent className='md:translate-y-12'>
@@ -124,7 +124,7 @@ export function SearchHeader() {
                   placeholder="Search..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="flex-1 h-12 px-4 outline-none"
+                  className="flex-1 h-12 px-4 outline-none font-svn-regular"
                 />
                 <button className="h-12 bg-[#1E4A36] px-6 text-white hover:bg-green-700 border-0">
                   <LucideSearch size={20} />
