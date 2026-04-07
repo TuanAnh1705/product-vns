@@ -69,21 +69,21 @@ export default function ProductDetailClient({ initialData, product, sku }: Clien
         <div className="flex items-center gap-2 text-sm text-gray-400 mb-8 font-medium">
           <span 
             onClick={() => handleBreadcrumbClick()} 
-            className="hover:text-[#256BE8] cursor-pointer transition-colors"
+            className="hover:text-[#1E4A36] cursor-pointer transition-colors"
           >
             All Categories
           </span>
           <span>{">"}</span>
           <span 
             onClick={() => handleBreadcrumbClick(product.category.main)} 
-            className="hover:text-[#256BE8] cursor-pointer transition-colors"
+            className="hover:text-[#1E4A36] cursor-pointer transition-colors"
           >
             {product.category.main}
           </span>
           <span>{">"}</span>
           <span 
             onClick={() => handleBreadcrumbClick(product.category.main, product.category.sub)} 
-            className="hover:text-[#256BE8] cursor-pointer transition-colors text-gray-600"
+            className="hover:text-[#1E4A36] cursor-pointer transition-colors text-gray-600"
           >
             {product.category.sub}
           </span>
