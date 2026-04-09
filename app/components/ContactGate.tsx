@@ -3,13 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import axios from "axios";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { ArrowRight } from "lucide-react";
 import { toast } from "react-hot-toast";
 import {
@@ -169,17 +162,12 @@ export function ContactGate() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[13px] md:text-sm font-svn-regular font-bold text-gray-600 ml-1">MOQ Preference</label>
-                <Select name="moq" defaultValue="0-99">
-                  <SelectTrigger className="w-full bg-white rounded-sm px-4 py-3 outline-none border-none focus:ring-2 focus:ring-[#1E4A36]/30 font-medium text-[#111F32]">
-                    <SelectValue placeholder="Select MOQ" />
-                  </SelectTrigger>
-                  <SelectContent className="font-svn-regular font-bold border-[#1E4A36]">
-                    <SelectItem value="0-99">0-99 items</SelectItem>
-                    <SelectItem value="100-499">100-499 items</SelectItem>
-                    <SelectItem value="500+">500+ items</SelectItem>
-                  </SelectContent>
-                </Select>
+                <label className="text-[13px] md:text-sm font-svn-regular font-bold text-gray-600 ml-1">Country</label>
+                <input
+                  name="country"
+                  placeholder="United States"
+                  className="w-full bg-white rounded-sm px-4 py-2 outline-none border-none focus:ring-2 focus:ring-[#256BE8]/30 font-medium text-[#111F32]"
+                />
               </div>
 
               <div className="space-y-1.5">

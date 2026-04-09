@@ -1,19 +1,19 @@
-import { ContactDTO, ContactSheetRow } from '../dto/product.dto';
-import { ContactRepository } from '../repositories/contact.repository';
+import { ContactDTO, HubSpotField } from "../dto/contact.dto";
+import { HubSpotRepository } from "../repositories/hubspot.repository";
 
 export class ContactService {
-    private repo = new ContactRepository();
+  private repo = new HubSpotRepository();
 
-    async saveInquiry(data: ContactDTO) {
-        const row: ContactSheetRow = {
-            Timestamp: new Date().toLocaleString('vi-VN'),
-            Name: data.name,
-            Email: data.email,
-            Company: data.companyName,
-            Website: data.website,
-            MOQ: data.moq,
-            Message: data.message
-        };
-        return await this.repo.addRow(row);
-    }
+  async saveInquiry(data: ContactDTO, pageUri: string): Promise<void> {
+    const fields: HubSpotField[] = [
+      { name: "firstname", value: data.name },
+      { name: "email", value: data.email },
+      ...(data.companyName ? [{ name: "company", value: data.companyName }] : []),
+      ...(data.website ? [{ name: "website", value: data.website }] : []),
+      ...(data.country ? [{ name: "country", value: data.country }] : []),
+      ...(data.message ? [{ name: "message", value: data.message }] : []),
+    ];
+
+    await this.repo.submit(fields, pageUri);
+  }
 }

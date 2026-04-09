@@ -9,8 +9,9 @@ export class ContactController {
     async handlePost(req: NextRequest): Promise<NextResponse<ApiResponse<null>>> {
         try {
             const body = await req.json();
-            await this.service.saveInquiry(body);
-            
+            const pageUri = req.headers.get('referer') ?? req.nextUrl.origin;
+            await this.service.saveInquiry(body, pageUri);
+
             return NextResponse.json({
                 success: true,
                 data: null,

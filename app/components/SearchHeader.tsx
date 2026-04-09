@@ -95,7 +95,7 @@ export function SearchHeader() {
               </button>
 
               {/* Logo */}
-              <Link href="/">
+              <Link href="https://vietnamsourcing.co/" target="_blank" rel="noopener noreferrer">
                 <div className="w-32 h-10 md:w-48 md:h-12 relative shrink-0 cursor-pointer">
                   <Image src="/assets/Group.png" alt="China Sourcing" fill className="object-contain" />
                 </div>

@@ -6,15 +6,16 @@ import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
 import { ScrollToTop } from "./components/ScrollToTop";
 import ContentProtection from "./components/ContentProtection";
+import { ContactGate } from "./components/ContactGate";
 
 
 export const metadata: Metadata = {
   title: "Vietnam Sourcing Partner - Vietnam Sourcing",
   description: "Our team has the capacity to source, procure, design and produce any product which is made within Vietnam so if there is a product you cannot see in our list below please reach out to our team to discuss.",
   icons: {
-    icon: "/assets/LogoVNS.png", 
+    icon: "/assets/LogoVNS.png",
     shortcut: "/assets/LogoVNS.png",
-    apple: "/assets/LogoVNS.png", 
+    apple: "/assets/LogoVNS.png",
   },
 };
 
@@ -27,7 +28,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ContentProtection />
-<SearchProvider>
+        <ContactGate />
+        <SearchProvider>
           <SearchHeader />
           <Toaster
             // 1. Đặt vị trí cơ bản là top-center để nó căn giữa chiều ngang trước
