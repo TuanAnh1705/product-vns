@@ -1,9 +1,7 @@
 import { HubSpotField } from "../dto/contact.dto";
 
 export class HubSpotRepository {
-  private readonly apiUrl: string;
-
-  constructor() {
+  private getApiUrl(): string {
     const portalId = process.env.HUBSPOT_PORTAL_ID;
     const formId = process.env.HUBSPOT_FORM_ID;
 
@@ -11,11 +9,11 @@ export class HubSpotRepository {
       throw new Error("Missing HUBSPOT_PORTAL_ID or HUBSPOT_FORM_ID env vars");
     }
 
-    this.apiUrl = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
+    return `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
   }
 
   async submit(fields: HubSpotField[], pageUri: string): Promise<void> {
-    const response = await fetch(this.apiUrl, {
+    const response = await fetch(this.getApiUrl(), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

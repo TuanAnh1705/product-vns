@@ -4,13 +4,18 @@ import { ContactService } from '../services/contact.service';
 import { ApiResponse } from '../dto/product.dto';
 
 export class ContactController {
-    private service = new ContactService();
+    private service: ContactService | null = null;
+
+    private getService(): ContactService {
+        if (!this.service) this.service = new ContactService();
+        return this.service;
+    }
 
     async handlePost(req: NextRequest): Promise<NextResponse<ApiResponse<null>>> {
         try {
             const body = await req.json();
             const pageUri = req.headers.get('referer') ?? req.nextUrl.origin;
-            await this.service.saveInquiry(body, pageUri);
+            await this.getService().saveInquiry(body, pageUri);
 
             return NextResponse.json({
                 success: true,
